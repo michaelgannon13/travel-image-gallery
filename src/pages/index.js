@@ -1,42 +1,10 @@
 import * as React from "react"
-import Img from "gatsby-image"
-import { useStaticQuery, graphql } from "gatsby"
-import "./index.css"
+import Gallery from "../components/gallery"
 
-const useGallery = () => {
-  const data = useStaticQuery(graphql`
-    query {
-      allFile(
-        filter: { sourceInstanceName: { eq: "gallery" } }
-      ) {
-        nodes {
-          id
-          childImageSharp {
-            fluid {
-              ...GatsbyImageSharpFluid
-            }
-          }
-        }
-      }
-    }
-  `);
-
-  return data.allFile.nodes.map(node => ({
-    ...node.childImageSharp, // Note that we're spreading the childImageSharp object here
-    id: node.id,
-  }));
-};
-
-const Gallery = () => {
-  const images = useGallery()
+const FirstPage = () => {
 
   return (
-      <div className="gallery">
-          {images.map(({ id, fluid }) => (
-              <Img key={id} fluid={fluid} />
-          ))}
-      </div>
+    <Gallery></Gallery>
   )
 }
-
-  export default Gallery
+  export default FirstPage
